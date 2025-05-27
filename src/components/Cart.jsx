@@ -3,9 +3,7 @@ import s from "./Cart.module.scss";
 import { useSelector } from "react-redux";
 
 const Cart = ({cartMenu, setCartMenu}) => {
-  const { cart } = useSelector((state) => state.products);
-  console.log(cart);
-  
+  const { cart } = useSelector((state) => state.products);  
 
   return (
     <>

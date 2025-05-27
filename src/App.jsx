@@ -12,7 +12,7 @@ function App() {
   const [search, setSearch] = useState("");
   const { products, cart } = useSelector((state) => state.products);
   const dispatch = useDispatch();
-  const [cartMenu, setCartMenu] = useState(true);
+  const [cartMenu, setCartMenu] = useState(false);
 
   useEffect(() => {
     dispatch(getProducts(""));

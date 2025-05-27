@@ -12,7 +12,6 @@ export const getProducts = createAsyncThunk(
     const { data } = await axios.get(
       `https://dummyjson.com/products/search?q=${search}`
     );
-    console.log(data);
     return data.products;
   }
 );
