@@ -1,0 +1,27 @@
+$Monteserrat: ('Bold', 700);
+$Inter: ('Light', 300), ('Regular', 400), ('Bold', 700);
+$Roboto: ('Bold', 700);
+
+@each $name, $weight in $Monteserrat {
+    @font-face {
+        font-family: 'Monteserrat';
+        src: url('/public/fonts/Montserrat-#{$name}.ttf');
+        font-weight: $weight;
+    }
+}
+
+@each $name, $weight in $Inter {
+    @font-face {
+        font-family: 'Inter';
+        src: url('/public/fonts/Inter-#{$name}.ttf');
+        font-weight: $weight;
+    }
+}
+
+@each $name, $weight in $Roboto {
+    @font-face {
+        font-family: 'Roboto';
+        src: url('/public/fonts/Roboto-#{$name}.ttf');
+        font-weight: $weight;
+    }
+}

@@ -1,0 +1,106 @@
+.products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 530px;
+    margin-top: 50px;
+    gap: 30px;
+    
+
+    &__item {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        transition: all 400ms;
+        cursor: pointer;
+
+        &_box {
+            position: relative;            
+        }
+
+        &_thumbnail {
+            object-fit: cover;
+            background-color: grey;
+            z-index: -3;
+            max-width: 340px;
+            width: 100%;
+            max-height: 340px;
+            height: 100%;
+        }
+
+        &_content {
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            gap: 8px;
+            z-index: 2;
+            background: #060506;
+            height: 100%;
+            width: 100%;
+        }
+
+        &_title {
+            margin-top: 16px;
+            font-family: var(--font-family);
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 156%;
+            text-align: center;
+            color: white;
+        }
+
+        &_price {
+            font-family: var(--font-family);
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 159%;
+            text-align: center;
+            color: white;
+        }
+
+        &_btn {
+            border-radius: 20px;
+            max-width: 239px;
+            width: 100%;
+            padding: 8px 0;
+            font-family: var(--second-family);
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 150%;
+            text-align: center;
+            margin: 0 auto;
+            color: white;
+            background: #8858ED;
+            transition: all 400ms ease-in-out;
+
+            &:hover {
+                background: white;
+                color: #8858ED;
+            }
+        }
+
+        &_description {
+            display: block;
+            position: absolute;
+            background-color: rgba(134, 86, 238, 0.5);
+            backdrop-filter: blur(15px);
+            padding: 8px;
+            height: 130px;
+            overflow-y: scroll;
+            font-family: var(--font-family);
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 159%;
+            color: white;
+            bottom: -100px;
+            opacity: 0;
+            transition: all 400ms;
+            z-index: 0;
+        }
+
+        &:hover &_description {
+            bottom: -3px;
+            opacity: 1;
+        }
+    }
+
+}
