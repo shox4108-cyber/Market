@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, getProducts } from "../store/products/productsSlice";
+import { addToCart, getProducts } from "../../store/products/productsSlice";
 import s from "./Products.module.scss";
 
 const Products = ({ search }) => {

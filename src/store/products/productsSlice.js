@@ -16,28 +16,33 @@ export const getProducts = createAsyncThunk(
   }
 );
 
-export const filterABC = createAsyncThunk(
-  "productsSlice/filterABC",
-  async ({ price, sort }) => {
-    const { data } = await axios.get(
-      `https://dummyjson.com/products?sortBy=title&order=${sort}`
-    );
-    const filtered = data.products.filter(
-      (product) => product.price >= 0 && product.price <= price
-    );
-    return filtered;
+export const filterProducts = createAsyncThunk(
+  "productsSlice/filterProducts",
+  async ({ category, price, sort }) => {
+    let url = 'https://dummyjson.com/products';
+    if (category && category !== "All Products") {
+      url = `https://dummyjson.com/products/category/${category}`;
+    }
+
+    const { data } = await axios.get(url);
+    let products = data.products;
+
+    if (sort) {
+      products.sort((a, b) =>
+        sort === "asc" ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title)
+      );
+    }
+
+    if (price) {
+      products = products.filter(
+        (product) => product.price >= 0 && product.price <= price
+      );
+    }
+
+    return products;
   }
 );
 
-export const filterCategory = createAsyncThunk(
-  "productsSlice/filterCategory",
-  async (category) => {
-    const { data } = await axios.get(
-      `https://dummyjson.com/products/category/${category}`
-    );
-    return data.products;
-  }
-);
 
 const productsSlice = createSlice({
   name: "productsSlice",
@@ -46,19 +51,14 @@ const productsSlice = createSlice({
     addToCart(state, action) {
       if (!state.cart.includes(action.payload)) {
         state.cart.push(action.payload)
-      }
-      console.log(state.cart.length);
-      
+      }      
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getProducts.fulfilled, (state, action) => {
       state.products = action.payload;
     });
-    builder.addCase(filterABC.fulfilled, (state, action) => {
-      state.products = action.payload;
-    });
-    builder.addCase(filterCategory.fulfilled, (state, action) => {
+    builder.addCase(filterProducts.fulfilled, (state, action) => {
       state.products = action.payload;
     });
   },

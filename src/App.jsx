@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import cart from "../public/images/cartIcon.svg";
-import Filter from "./components/Filter";
-import Loader from "./components/Loader";
+import Filter from "./components/Filter/Filter";
+import Loader from "./components/Loader/Loader";
 import { useEffect, useState } from "react";
-import Products from "./components/Products";
+import Products from "./components/Products/Products";
 import { getProducts } from "./store/products/productsSlice";
-import Cart from "./components/Cart";
+import Cart from "./components/Cart/Cart";
 
 function App() {
   const { currentCategory } = useSelector((state) => state.category);
