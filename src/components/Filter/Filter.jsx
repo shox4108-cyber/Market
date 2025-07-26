@@ -49,7 +49,7 @@ const Filter = () => {
                 activeCategory === "All Products" ? s.active : ""
               }`}
               onClick={() => {
-                handleClick("All Products"), dispatch(getProducts(""));
+                setActiveCategory("All Products"), dispatch(getProducts(""));
               }}
             >
               All Products
@@ -78,8 +78,9 @@ const Filter = () => {
                 id="asc"
                 value="asc"
                 checked={sort === "asc"}
+                onChange={handleChange}
               />
-              <label for="asc">Name A-Z</label>
+              <label htmlFor="asc">Name A-Z</label>
             </div>
             <div className={s.filter__sort_item}>
               <input
@@ -88,8 +89,9 @@ const Filter = () => {
                 id="desc"
                 value="desc"
                 checked={sort === "desc"}
+                onChange={handleChange}
               />
-              <label for="desc">Name Z-A</label>
+              <label htmlFor="desc">Name Z-A</label>
             </div>
           </form>
         </div>

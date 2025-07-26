@@ -1,0 +1,41 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 50px;
+
+
+    li {
+        cursor: pointer;
+
+        &.active a {
+            background-color: #8858ED;
+        }
+
+        &.previous.disabled,
+        .next.disabled {
+            display: none;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            width: 50px;
+            background: none;
+            border: 1px solid #8858ED;
+            color: white;
+            font-family: var(--font-family);
+            border-radius: 20%;
+            font-size: medium;
+            box-shadow: 0 2px 14px #8858ED;
+            transition: 300ms ease-in-out;
+
+            &:hover {
+                background-color: #8858ED;
+            }
+        }
+    }
+}

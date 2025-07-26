@@ -1,21 +1,29 @@
 import { useDispatch, useSelector } from "react-redux";
-import cart from "../public/images/cartIcon.svg";
-import Filter from "./components/Filter/Filter";
-import Loader from "./components/Loader/Loader";
+import Filter from "../components/Filter/Filter";
+import Loader from "../components/Loader/Loader";
 import { useEffect, useState } from "react";
-import Products from "./components/Products/Products";
-import { getProducts } from "./store/products/productsSlice";
-import Cart from "./components/Cart/Cart";
+import Products from "../components/Products/Products";
+import { getProducts } from "../store/products/productsSlice";
+import Cart from "../components/Cart/Cart";
+import Pagination from "../components/Paginate/Pagination";
 
-function App() {
+const Home = () => {
   const { currentCategory } = useSelector((state) => state.category);
   const [search, setSearch] = useState("");
-  const { products, cart } = useSelector((state) => state.products);
+  const { total, products, cart } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const [cartMenu, setCartMenu] = useState(false);
+  const [page, setPage] = useState(0);
+  const limit = 9;
+  const skip = page * limit
 
   useEffect(() => {
-    dispatch(getProducts(""));
+    dispatch(getProducts({ search: "", limit, skip}));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
+
+  useEffect(() => {
+    dispatch(getProducts({search: "", limit, skip}));
   }, []);
 
   return (
@@ -42,16 +50,16 @@ function App() {
                           width="25px"
                         >
                           <path
-                            stroke-linejoin="round"
-                            stroke-linecap="round"
-                            stroke-width="1.5"
+                            strokeLinejoin="round"
+                            strokeLinecap="round"
+                            strokeWidth="1.5"
                             stroke="#fff"
                             d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
                           ></path>
                           <path
-                            stroke-linejoin="round"
-                            stroke-linecap="round"
-                            stroke-width="1.5"
+                            strokeLinejoin="round"
+                            strokeLinecap="round"
+                            strokeWidth="1.5"
                             stroke="#fff"
                             d="M22 22L20 20"
                           ></path>
@@ -66,14 +74,14 @@ function App() {
                       />
                     </div>
                     <svg
-                    onClick={() => setCartMenu(!cartMenu)}
+                      onClick={() => setCartMenu(!cartMenu)}
                       width="50"
                       className="wrapper__cart-top-icon"
                       height="35"
                       viewBox="0 0 60 45"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      style={{cursor: 'pointer'}}
+                      style={{ cursor: "pointer" }}
                     >
                       <path
                         d="M55 13L50 30H20L10 5H0V0H12L22 25H46L50 13H55Z"
@@ -96,8 +104,12 @@ function App() {
                   </div>
                 </div>
                 <div className="wrapper__cart-bottom">
-                  <Products search={search} />
+                  <Products limit={limit} search={search} skip={skip} />
                 </div>
+                <Pagination
+                  pageCount={Math.ceil(total / limit)}
+                  onPageChange={({ selected }) => setPage(selected)}
+                />
               </div>
             </div>
           </div>
@@ -105,6 +117,6 @@ function App() {
       </div>
     </>
   );
-}
+};
 
-export default App;
+export default Home;
